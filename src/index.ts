@@ -60,6 +60,8 @@ async function startServer() {
     console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
     console.log(`📊 Health check: http://0.0.0.0:${PORT}/health`);
     console.log(`📝 API docs: http://0.0.0.0:${PORT}/api/orders/execute`);
+    console.log('Registered routes:');
+    console.log(fastify.printRoutes());
   } catch (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

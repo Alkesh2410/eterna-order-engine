@@ -137,6 +137,26 @@
           "path": ["api", "orders", "execute"]
         }
       }
+    },
+    {
+      "name": "Get Order Status (WebSocket)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/ws/orders/{{order_id}}/status",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "ws",
+            "orders",
+            "{{order_id}}",
+            "status"
+          ]
+        },
+        "description": "This is a WebSocket endpoint. To use it in Postman:\n1. Open a new WebSocket request tab.\n2. Set the URL to: ws://localhost:3000/ws/orders/{{order_id}}/status (replace {{base_url}} with ws://localhost:3000).\n3. Replace {{order_id}} with a valid order ID.\n4. Click 'Connect' to start receiving real-time status updates."
+      }
     }
   ],
   "variable": [
@@ -152,4 +172,3 @@
     }
   ]
 }
-

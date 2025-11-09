@@ -18,7 +18,7 @@ if (!ORDER_ID) {
   process.exit(1);
 }
 
-const ws = new WebSocket(`${BASE_URL}/api/orders/${ORDER_ID}/status`);
+const ws = new WebSocket(`${BASE_URL}/ws/orders/${ORDER_ID}/status`);
 
 ws.on('open', () => {
   console.log(`✅ Connected to order ${ORDER_ID}`);

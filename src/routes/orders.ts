@@ -107,11 +107,46 @@ export async function orderRoutes(
   );
 
   /**
-   * WebSocket endpoint for order status updates
    * GET /api/orders/:orderId/status
+   * Get order status
    */
   fastify.get(
     '/api/orders/:orderId/status',
+    {
+      schema: {
+        description: 'Get order status',
+        tags: ['orders'],
+        params: {
+          type: 'object',
+          properties: {
+            orderId: { type: 'string' },
+          },
+        },
+      },
+    },
+    async (request: FastifyRequest, reply: FastifyReply) => {
+      const orderId = (request.params as { orderId: string }).orderId;
+      const order = await orderRepository.findById(orderId);
+
+      if (!order) {
+        return reply.code(404).send({
+          error: 'Order not found',
+        });
+      }
+
+      return reply.code(200).send({
+        orderId: order.id,
+        status: order.status,
+      });
+    }
+  );
+
+  /**
+   * WebSocket endpoint for order status updates
+   * GET /ws/orders/:orderId/status
+   */
+  fastify.get(
+    '/ws/orders/:orderId/status',
     { websocket: true },
     async (connection: any, request: FastifyRequest) => {
       const orderId = (request.params as { orderId: string }).orderId;
