@@ -10,11 +10,11 @@ export const initPostgreSQL = async (): Promise<Pool> => {
   }
 
   pgPool = new Pool({
-    host: process.env.POSTGRES_HOST || 'localhost',
-    port: parseInt(process.env.POSTGRES_PORT || '5432'),
-    database: process.env.POSTGRES_DB || 'eterna_orders',
-    user: process.env.POSTGRES_USER || 'postgres',
-    password: process.env.POSTGRES_PASSWORD || 'postgres',
+    host: process.env.PGHOST || 'localhost',
+    port: parseInt(process.env.PGPORT || '5432'),
+    database: process.env.PGDATABASE || 'eterna_orders',
+    user: process.env.PGUSER || 'postgres',
+    password: process.env.PGPASSWORD || 'postgres',
     max: 20,
     idleTimeoutMillis: 30000,
     connectionTimeoutMillis: 2000,
@@ -38,9 +38,9 @@ export const initRedis = (): Redis => {
   }
 
   redisClient = new Redis({
-    host: process.env.REDIS_HOST || 'localhost',
-    port: parseInt(process.env.REDIS_PORT || '6379'),
-    password: process.env.REDIS_PASSWORD || undefined,
+    host: process.env.REDISHOST || 'localhost',
+    port: parseInt(process.env.REDISPORT || '6379'),
+    password: process.env.REDISPASSWORD || undefined,
     retryStrategy: (times: number) => {
       const delay = Math.min(times * 50, 2000);
       return delay;
